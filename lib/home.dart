@@ -1,6 +1,8 @@
 import 'package:chains/colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:chains/chain.dart';
+import 'package:chains/cycle.dart';
+import 'package:chains/stats.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -24,9 +26,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          decoration: BoxDecoration(color: Colors.white),
-        ),
+        TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+          Cycle(),
+          Stats(),
+          Chain()
+        ],),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Column(
@@ -72,7 +78,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               tabController: _tabController,
                             ),
                             TabItem(
-                              title: "Stats",
+                              title: "Points",
                               icons: [Icons.menu, Icons.clear_all],
                               index: 1,
                               tabController: _tabController,
@@ -93,7 +99,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 }
-
 class TabItem extends StatefulWidget {
   String title;
   List<IconData> icons;
