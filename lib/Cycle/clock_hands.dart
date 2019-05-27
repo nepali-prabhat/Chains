@@ -9,9 +9,8 @@ import 'package:flutter/material.dart';
 
 class ClockHands extends StatelessWidget {
   final DateTime dateTime;
-  final bool showHourHandleHeartShape;
-
-  ClockHands({this.dateTime, this.showHourHandleHeartShape = false});
+  final int noOfDials;
+  ClockHands({this.dateTime, this.noOfDials});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +22,8 @@ class ClockHands extends StatelessWidget {
             child: new Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
-                  new CustomPaint( painter: new HourHandPainter(
-                      hours: dateTime.hour, minutes: dateTime.minute, showHeartShape: showHourHandleHeartShape),
-                  ),
                   new CustomPaint(painter: new MinuteHandPainter(
-                      minutes: dateTime.minute, seconds: dateTime.second),
-                  ),
-                  new CustomPaint(painter: new SecondHandPainter(seconds: dateTime.second),
+                      minutes: dateTime.minute, seconds: dateTime.second,noOfDials: noOfDials),
                   ),
                 ]
             )

@@ -10,7 +10,7 @@ class Cycle extends StatelessWidget {
       body: SafeArea(
         child: new Padding(
           padding: const EdgeInsets.all(30),
-          child: new Clock(),
+          child: new Clock(noOfDials: 30,),
         ),
       ),
     );

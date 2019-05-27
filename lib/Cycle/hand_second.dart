@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 class SecondHandPainter extends CustomPainter{
   final Paint secondHandPaint;
   final Paint secondHandPointsPaint;
-
+    int noOfDials;
   int seconds;
 
-  SecondHandPainter({this.seconds}):
-        secondHandPaint= new Paint(),
-        secondHandPointsPaint= new Paint(){
+  SecondHandPainter({this.seconds, this.noOfDials}):
+    secondHandPaint= new Paint(),
+    secondHandPointsPaint= new Paint(){
     secondHandPaint.color= Colors.red;
     secondHandPaint.style= PaintingStyle.stroke;
     secondHandPaint.strokeWidth= 2.0;
@@ -29,14 +29,13 @@ class SecondHandPainter extends CustomPainter{
 
     canvas.translate(radius, radius);
 
-    canvas.rotate(2*pi*this.seconds/60);
+    canvas.rotate(2*pi*this.seconds/noOfDials);
 
     Path path1= new Path();
     Path path2 = new Path();
-    path1.moveTo(0.0, -radius );
-    path1.lineTo(0.0, radius/4);
+    path1.moveTo(0.0, -radius *0.1 );
+    path1.lineTo(0.0, 0.0);
 
-    path2.addOval(new Rect.fromCircle(radius: 7.0, center: new Offset(0.0, -radius)));
     path2.addOval(new Rect.fromCircle(radius: 5.0, center: new Offset(0.0, 0.0)));
 
     canvas.drawPath(path1, secondHandPaint);
