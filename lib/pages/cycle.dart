@@ -44,8 +44,6 @@ class _CycleState extends State<Cycle> {
                 StreamBuilder(
                     stream: cycleService.isCycling$,
                     builder: (context, snapshot) {
-                        print(snapshot.connectionState);
-                        print(snapshot.data);
                         return Center(
                             child: Column(
                           children: <Widget>[

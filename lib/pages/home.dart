@@ -1,19 +1,25 @@
 import 'package:chains/colors.dart';
+import 'package:chains/main.dart' as prefix0;
+import 'package:chains/model/UserModel.dart';
+import 'package:chains/service/userService.dart';
 import 'package:flutter/material.dart';
 import 'package:chains/pages/chain.dart';
 import 'package:chains/pages/cycle.dart';
 import 'package:chains/pages/stats.dart';
 
 class Home extends StatefulWidget {
+    
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
+  UserService userService;
   @override
   void initState() {
     super.initState();
+    userService = prefix0.userController.get<UserService>();
     _tabController = new TabController(vsync: this, length: 3, initialIndex: 0);
   }
 
@@ -94,7 +100,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ],
-            
           )
         ],
       ),

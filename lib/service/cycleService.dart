@@ -10,7 +10,7 @@ class CycleService {
   BehaviorSubject<int> _elapsedTime;
 
   CycleService() {
-    _duration = BehaviorSubject<int>.seeded(1);
+    _duration = BehaviorSubject<int>.seeded(15);
     _isCycling = BehaviorSubject<bool>.seeded(false);
     _elapsedTime = BehaviorSubject<int>.seeded(0);
     _startTime =
@@ -34,6 +34,7 @@ class CycleService {
       _startTime.add(DateTime.now());
       _isCycling.add(true);
       _timer = new Timer.periodic(Duration(seconds: 1), _increaseTime);
+
     }
   }
 
