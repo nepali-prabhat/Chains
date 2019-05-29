@@ -1,16 +1,21 @@
+import 'dart:convert';
+
+import 'package:chains/service/userService.dart';
 import 'package:rxdart/rxdart.dart';
 import 'dart:async';
+import 'package:http/http.dart' as http;
+import 'package:chains/main.dart';
 
 class CycleService {
   Timer _timer;
   BehaviorSubject<int> _duration;
-
+  int _cycleId; 
   BehaviorSubject<DateTime> _startTime;
   BehaviorSubject<bool> _isCycling = BehaviorSubject<bool>.seeded(false);
   BehaviorSubject<int> _elapsedTime;
 
   CycleService() {
-    _duration = BehaviorSubject<int>.seeded(15);
+    _duration = BehaviorSubject<int>.seeded(1);
     _isCycling = BehaviorSubject<bool>.seeded(false);
     _elapsedTime = BehaviorSubject<int>.seeded(0);
     _startTime =
@@ -34,7 +39,19 @@ class CycleService {
       _startTime.add(DateTime.now());
       _isCycling.add(true);
       _timer = new Timer.periodic(Duration(seconds: 1), _increaseTime);
+      var body = {
+        "token": userController.get<UserService>().token,
+        "date_time": startTime.toString(),
+        "duration": duration.toString()
+      };
+      http
+          .post('http://192.168.1.70:3000/chains/make', body: body)
+          .then((response) {
+                print(response.body);
+                _cycleId = jsonDecode(response.body)['id'];
+                //print(_cycleId);
 
+      });
     }
   }
 
@@ -48,7 +65,7 @@ class CycleService {
 
   void decreaseDuration() {
     if (!isCycling) {
-      if (duration >= 5) {
+      if (duration >=1) {
         _duration.add(duration - 5);
       }
     }
@@ -69,6 +86,14 @@ class CycleService {
         _elapsedTime.add(elapsedTime + 1);
       } else {
         endCycle();
+        var body = {
+          "token": userController.get<UserService>().token,
+        };
+        http
+            .put('http://192.168.1.70:3000/chains/complete/$_cycleId', body: body)
+            .then((response) {
+                print(response.body);
+        });
       }
     }
   }

@@ -1,6 +1,5 @@
 import 'package:chains/colors.dart';
 import 'package:chains/main.dart' as prefix0;
-import 'package:chains/model/UserModel.dart';
 import 'package:chains/service/userService.dart';
 import 'package:flutter/material.dart';
 import 'package:chains/pages/chain.dart';
