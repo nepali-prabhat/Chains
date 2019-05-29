@@ -1,10 +1,11 @@
-import 'package:chains/model/UserModel.dart';
-import 'package:chains/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:chains/pages/login.dart';
 import 'package:chains/pages/home.dart';
 import 'package:get_it/get_it.dart';
 import 'package:chains/service/cycleService.dart';
 import 'package:chains/service/userService.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 GetIt cycleController = new GetIt();
 GetIt userController = new GetIt();
