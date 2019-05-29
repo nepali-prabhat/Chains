@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:chains/home.dart';
-
-void main() => runApp(Chain());
+import 'package:chains/pages/home.dart';
+import 'package:get_it/get_it.dart';
+import'package:chains/service/cycleService.dart';
+GetIt cycleController = new GetIt();
+void main(){
+    cycleController.registerSingleton<CycleService>(new CycleService());
+    runApp(Chain());
+}
 
 class Chain extends StatelessWidget {
   @override
